@@ -33,6 +33,6 @@ grub-set-default Installer || true
 sed -i -e 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=Installer/g' /etc/default/grub
 
 update-grub
-find /boot -name grub.cfg |xargs -i echo 'grub2-mkconfig >/boot/efi/EFI/centos/grub.cfg'|bash -e
+find /boot -name grub.cfg |xargs -i grub2-mkconfig -o {}
 
 
