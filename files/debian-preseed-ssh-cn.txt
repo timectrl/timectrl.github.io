@@ -453,6 +453,10 @@ d-i preseed/late_command string \
 	in-target chown -R zhangquan:zhangquan /home/zhangquan/.ssh ; \
 	in-target chmod 700 /home/zhangquan/.ssh ;\
 	in-target chmod 600 /home/zhangquan/.ssh/authorized_keys ; \
+	in-target cp /etc/apt/sources.list /etc/apt/sources.list.origin ; \
+	in-target sed -i s@deb.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
+	in-target sed -i s@ftp.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
+	in-target sed -i s@security.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
 	if [ -f /sys/firmware/efi/runtime ] ; \
 	then \
 	in-target mkdir -p /boot/efi/EFI/boot ; \
