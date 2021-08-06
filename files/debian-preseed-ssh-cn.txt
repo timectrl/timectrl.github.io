@@ -95,12 +95,12 @@ d-i network-console/authorized_keys_url string http://www.timectrl.net/files/aut
 ### Mirror settings
 # If you select ftp, the mirror/country string does not need to be set.
 d-i mirror/protocol string http
-#d-i mirror/country string "China"
-d-i mirror/country string "United States"
-d-i mirror/http/hostname string deb.debian.org
+d-i mirror/country string "China"
+#d-i mirror/country string "United States"
+#d-i mirror/http/hostname string deb.debian.org
 #d-i mirror/http/hostname string ftp.us.debian.org
 #d-i mirror/http/hostname string ftp.cn.debian.org
-#d-i mirror/http/hostname string mirrors.huaweicloud.com
+d-i mirror/http/hostname string mirrors.huaweicloud.com
 #d-i mirror/http/hostname string mirrors.163.com
 d-i mirror/http/directory string /debian
 d-i mirror/http/proxy string
