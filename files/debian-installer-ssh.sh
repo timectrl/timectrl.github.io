@@ -7,8 +7,9 @@ fi
 
 set -x
 
-wget -O /linux http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
-wget -O /initrd.gz http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+PREFIX=$(df -h /boot/|grep dev|awk '{print $6}')
+wget -O ${PREFIX}/linux http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
+wget -O ${PREFIX}/initrd.gz http://ftp.us.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
 
 EFI=""
 if [ -f /sys/firmware/efi/runtime ]
@@ -31,6 +32,7 @@ ENDL
 grub-set-default Installer || true
 sed -i -e 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=Installer/g' /etc/default/grub
 
-update-grub || (grub2-mkconfig >/boot/efi/EFI/centos/grub.cfg)
+update-grub
+find /boot -name grub.cfg |xargs -i echo 'grub2-mkconfig >/boot/efi/EFI/centos/grub.cfg'|bash -e
 
 
