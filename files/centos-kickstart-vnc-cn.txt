@@ -1,0 +1,50 @@
+#version=RHEL8
+# Use graphical install
+graphical
+
+repo --name="AppStream" --baseurl=https://repo.huaweicloud.com/centos/8-stream/AppStream/x86_64/os
+
+%packages
+@^minimal-environment
+
+%end
+
+# Keyboard layouts
+keyboard --xlayouts='us'
+# System language
+lang en_US.UTF-8
+
+# Network information
+network  --hostname=localhost.localdomain
+
+# Use network installation
+url --url="https://repo.huaweicloud.com/centos/8-stream/BaseOS/x86_64/os"
+
+# Run the Setup Agent on first boot
+firstboot --enable
+# Do not configure the X Window System
+skipx
+
+ignoredisk --only-use=vda
+# Partition clearing information
+clearpart --drives=vda --all
+# Disk partitioning information
+part / --fstype="xfs" --ondisk=vda --size=10240 --grow
+
+# System timezone
+timezone Asia/Shanghai --isUtc
+
+#Root password
+rootpw --plaintext PaffW0rD
+#user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
+
+%addon com_redhat_kdump --disable --reserve-mb='auto'
+
+%end
+
+%anaconda
+pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
+pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
+%end
+
