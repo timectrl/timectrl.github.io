@@ -28,18 +28,18 @@ firstboot --enable
 # Do not configure the X Window System
 skipx
 
-#ignoredisk --only-use=vda
+ignoredisk --only-use=vda
 # Partition clearing information
-#clearpart --all --drives=vda
+clearpart --all --drives=vda
 # Disk partitioning information
-#part / --fstype="xfs" --ondisk=vda --size=10240 --grow
+part / --fstype="xfs" --ondisk=vda --size=10240 --grow
 
 # System timezone
 timezone Asia/Shanghai --isUtc
 
 #Root password
 rootpw --plaintext PaffW0rD
-user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
+#user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
 
 
 
@@ -54,8 +54,7 @@ pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 %end
 
 
-#%post --log=/root/init.log
-%post
+%post --log=/root/init.log
 dnf -y install wget
 
 mkdir -p /root/.ssh
@@ -64,15 +63,15 @@ chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 passwd -l root
 
-mkdir -p /home/zhangquan/.ssh
-wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
-chmod 700 /home/zhangquan/.ssh
-chmod 600 /home/zhangquan/.ssh/authorized_keys
-passwd -l zhangquan
-echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
+#mkdir -p /home/zhangquan/.ssh
+#wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+#chmod 700 /home/zhangquan/.ssh
+#chmod 600 /home/zhangquan/.ssh/authorized_keys
+#passwd -l zhangquan
+#echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
 
 
-#dnf -y install http://static.jikedata.com/rpm/proton.rpm
+dnf -y install http://static.jikedata.com/rpm/proton.rpm
 
 rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
 %end

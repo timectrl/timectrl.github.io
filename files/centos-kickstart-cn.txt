@@ -73,7 +73,7 @@ echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
 
-#rm -fr /root/original-ks.cfg
+#rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
 %end
 
 
