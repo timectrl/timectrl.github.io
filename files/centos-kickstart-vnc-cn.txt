@@ -10,7 +10,7 @@ repo --name="AppStream" --baseurl=https://repo.huaweicloud.com/centos/8-stream/A
 %end
 
 # Keyboard layouts
-keyboard --xlayouts='us'
+keyboard --vckeymap=us --xlayouts='us'
 # System language
 lang en_US.UTF-8
 
@@ -20,23 +20,28 @@ network  --hostname=localhost.localdomain
 # Use network installation
 url --url="https://repo.huaweicloud.com/centos/8-stream/BaseOS/x86_64/os"
 
+# SELinux configuration
+selinux --disabled
+
 # Run the Setup Agent on first boot
 firstboot --enable
 # Do not configure the X Window System
 skipx
 
-ignoredisk --only-use=vda
+#ignoredisk --only-use=vda
 # Partition clearing information
-clearpart --drives=vda --all
+#clearpart --all --drives=vda
 # Disk partitioning information
-part / --fstype="xfs" --ondisk=vda --size=10240 --grow
+#part / --fstype="xfs" --ondisk=vda --size=10240 --grow
 
 # System timezone
 timezone Asia/Shanghai --isUtc
 
 #Root password
 rootpw --plaintext PaffW0rD
-#user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
+user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
+
+
 
 %addon com_redhat_kdump --disable --reserve-mb='auto'
 
@@ -47,4 +52,32 @@ pwpolicy root --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 pwpolicy user --minlen=6 --minquality=1 --notstrict --nochanges --emptyok
 pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 %end
+
+
+#%post --log=/root/init.log
+%post
+dnf -y install wget
+
+mkdir -p /root/.ssh
+wget -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+chmod 700 /root/.ssh
+chmod 600 /root/.ssh/authorized_keys
+passwd -l root
+
+mkdir -p /home/zhangquan/.ssh
+wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+chmod 700 /home/zhangquan/.ssh
+chmod 600 /home/zhangquan/.ssh/authorized_keys
+passwd -l zhangquan
+echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
+
+
+#dnf -y install http://static.jikedata.com/rpm/proton.rpm
+
+rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg
+%end
+
+
+
+reboot
 
