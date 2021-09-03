@@ -5,17 +5,18 @@
 graphical
 
 # Keyboard layouts
-keyboard --xlayouts='us'
+keyboard --vckeymap=us --xlayouts='us'
 # System language
 lang en_US.UTF-8
 
 # Use network installation
-url --url="https://repo.huaweicloud.com/fedora/releases/34/Everything/x86_64/os"
+url --url="http://mirrors.163.com/fedora/releases/34/Everything/x86_64/os"
 
-#%packages
+%packages
 #@^workstation-product-environment
+@^minimal-environment
 
-#%end
+%end
 
 # SELinux configuration
 selinux --disabled
@@ -26,10 +27,11 @@ firstboot --enable
 skipx
 
 # Generated using Blivet version 3.3.3
-#ignoredisk --only-use=vda
+ignoredisk --only-use=vda
 # Partition clearing information
-#clearpart --all --drives=vda
+clearpart --none --initlabel
 # Disk partitioning information
+#part / --fstype="xfs"
 #part /boot/efi --fstype="efi" --ondisk=vda --size=128   --fsoptions="umask=0077,shortname=winnt"
 #part /         --fstype="xfs" --ondisk=vda --size=10240 --grow
 
@@ -39,8 +41,6 @@ timezone Asia/Shanghai
 #Root password
 rootpw --lock
 user --groups=wheel --name=zhangquan --password=$6$knMxMxQswPp4m0ey$d2a5bx0jdg.xyLNZq8umq8jkiMBmVVmS.13wljTeUdmM9U7JXtW/MEjUrMFnRwmJ8Z2q36WrNMU2m4ZgI8/7z1 --iscrypted --gecos="ZhangQuan"
-
-
 
 #%post --log=/root/init.log
 %post
@@ -54,10 +54,31 @@ passwd -l root
 
 mkdir -p /home/zhangquan/.ssh
 wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+chown -R zhangquan:zhangquan /home/zhangquan/
 chmod 700 /home/zhangquan/.ssh
 chmod 600 /home/zhangquan/.ssh/authorized_keys
-#passwd -l zhangquan
+passwd -l zhangquan
+
 echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
+#echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/zhangquan-root
+
+systemctl disable firewalld.service
+systemctl disable dnf-makecache.timer
+
+dnf -y remove PackageKit-command-not-found PackageKit-gtk3-module gnome-boxes abrt* nano-default-editor
+
+
+dnf -y update
+dnf -y install vim-default-editor screen tcpdump mtr bash-completion openssl
+
+
+dnf -y install vim
+echo "alias vi='vim'" >>/root/.bashrc
+
+
+
+
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
@@ -66,6 +87,6 @@ echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
 %end
 
 
-
+# Reboot after installation
 reboot
 
