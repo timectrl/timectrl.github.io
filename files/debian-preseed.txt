@@ -458,6 +458,8 @@ d-i preseed/late_command string \
 	in-target cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi ; \
 	in-target bash -c '( echo "grub-efi-amd64 grub2/force_efi_extra_removable boolean true" | debconf-set-selections )' ; \
 	fi ;\
+	in-target apt-get -y update ; \
+	in-target apt-get -y install vim screen tcpdump wget mtr rsync bash-completion ; \
 	in-target passwd -l zhangquan ; \
 	in-target passwd -l root ; \
 	in-target sleep 1 ; \

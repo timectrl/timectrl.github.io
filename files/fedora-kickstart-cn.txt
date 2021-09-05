@@ -69,7 +69,7 @@ dnf -y remove PackageKit-command-not-found PackageKit-gtk3-module gnome-boxes ab
 
 
 dnf -y update
-dnf -y install vim-default-editor screen tcpdump mtr bash-completion openssl
+dnf -y install vim-default-editor screen tcpdump mtr rsync bash-completion openssl
 
 
 dnf -y install vim
