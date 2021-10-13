@@ -68,11 +68,10 @@ systemctl disable dnf-makecache.timer
 dnf -y remove PackageKit-command-not-found PackageKit-gtk3-module gnome-boxes abrt* nano-default-editor
 
 
-dnf -y update
-dnf -y install vim-default-editor screen tcpdump mtr rsync bash-completion openssl
+dnf -y update --exclude 'kernel-*'
+dnf -y install vim vim-default-editor screen tcpdump mtr rsync bash-completion openssl
 
 
-dnf -y install vim
 echo "alias vi='vim'" >>/root/.bashrc
 
 

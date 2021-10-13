@@ -452,6 +452,10 @@ d-i preseed/late_command string \
 	in-target chown -R zhangquan:zhangquan /home/zhangquan/.ssh ; \
 	in-target chmod 700 /home/zhangquan/.ssh ;\
 	in-target chmod 600 /home/zhangquan/.ssh/authorized_keys ; \
+	in-target mkdir -p /root/.ssh ;\
+	in-target wget -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys ; \
+	in-target chmod 700 /root/.ssh ;\
+	in-target chmod 600 /root/.ssh/authorized_keys ; \
 	if [ -f /sys/firmware/efi/runtime ] ; \
 	then \
 	in-target mkdir -p /boot/efi/EFI/boot ; \
