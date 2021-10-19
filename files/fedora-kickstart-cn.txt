@@ -76,6 +76,15 @@ echo "alias vi='vim'" >>/root/.bashrc
 
 
 
+touch /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
+ln -s /etc/rc.d/rc.local /etc/rc.local
+echo "#!/bin/bash" >>/etc/rc.d/rc.local
+echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n" >>/etc/rc.d/rc.local
+echo "exit 0" >>/etc/rc.d/rc.local
+echo -e "\n\n" >>/etc/rc.d/rc.local
+
+
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
