@@ -10,7 +10,7 @@ keyboard --vckeymap=us --xlayouts='us'
 lang en_US.UTF-8
 
 # Use network installation
-url --url="http://mirrors.163.com/fedora/releases/34/Everything/x86_64/os"
+url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/35/Everything/x86_64/os"
 
 %packages
 #@^workstation-product-environment
