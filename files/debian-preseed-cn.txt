@@ -461,6 +461,10 @@ d-i preseed/late_command string \
 	in-target sed -i s@deb.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
 	in-target sed -i s@ftp.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
 	in-target sed -i s@security.debian.org@repo.huaweicloud.com@g /etc/apt/sources.list ; \
+	in-target bash -c 'echo "#!/bin/bash" > /etc/rc.local' ;\
+	in-target bash -c 'echo -e "\n\n\n\n" >> /etc/rc.local' ;\
+	in-target bash -c 'echo "exit 0" >> /etc/rc.local' ;\
+	in-target chmod 755 /etc/rc.local ;\
 	if [ -f /sys/firmware/efi/runtime ] ; \
 	then \
 	in-target mkdir -p /boot/efi/EFI/boot ; \

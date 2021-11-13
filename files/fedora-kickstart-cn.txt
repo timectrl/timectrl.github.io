@@ -60,7 +60,7 @@ chmod 600 /home/zhangquan/.ssh/authorized_keys
 passwd -l zhangquan
 
 echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
-#echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/zhangquan-root
+echo '%wheel ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/zhangquan-root
 
 systemctl disable firewalld.service
 systemctl disable dnf-makecache.timer
