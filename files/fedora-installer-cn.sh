@@ -11,6 +11,8 @@ set -x
 MIRROR_PREFIX=https://dl.fedoraproject.org/pub/fedora/linux/releases/35/
 MIRROR_PREFIX=https://mirror.sjtu.edu.cn/fedora/linux/releases/35
 MIRROR_PREFIX=http://mirrors.163.com/fedora/releases/35
+MIRROR_PREFIX=http://mirrors.huaweicloud.com/fedora/releases/35
+MIRROR_PREFIX=http://repo.huaweicloud.com/fedora/releases/35
 
 PREFIX=$(df -h /boot/|grep dev|awk '{print $6}')
 wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/Everything/x86_64/os/isolinux/vmlinuz
