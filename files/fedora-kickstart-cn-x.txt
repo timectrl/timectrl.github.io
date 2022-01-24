@@ -10,11 +10,10 @@ keyboard --vckeymap=us --xlayouts='us'
 lang en_US.UTF-8
 
 # Use network installation
-#url --url="https://dl.fedoraproject.org/fedora/linux/releases/35/Everything/x86_64/os"
+#url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/35/Everything/x86_64/os"
 #url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/35/Everything/x86_64/os"
-#url --url="https://mirror.163.com/fedora/linux/releases/35/Everything/x86_64/os"
-#url --url="https://mirror.huaweicloud.com/fedora/linux/releases/35/Everything/x86_64/os"
-url --url="https://repo.huaweicloud.com/fedora/linux/releases/35/Everything/x86_64/os"
+#url --url="https://mirror.huaweicloud.com/fedora/releases/35/Everything/x86_64/os"
+url --url="https://repo.huaweicloud.com/fedora/releases/35/Everything/x86_64/os"
 
 %packages
 @^workstation-product-environment
