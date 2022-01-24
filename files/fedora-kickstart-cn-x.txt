@@ -74,7 +74,7 @@ dnf -y remove PackageKit-command-not-found PackageKit-gtk3-module gnome-boxes ab
 
 
 dnf -y update --exclude 'kernel-*'
-dnf -y install vim vim-default-editor screen tcpdump mtr rsync bash-completion openssl
+dnf -y install vim vim-default-editor screen tcpdump curl wget mtr rsync bash-completion openssl less sqlite zip unzip xz
 
 
 echo "alias vi='vim'" >>/root/.bashrc
@@ -92,6 +92,9 @@ echo -e "\n\n" >>/etc/rc.d/rc.local
 
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf -y install unrar p7zip
+#dnf -y install iproute net-tools lrzsz crontabs 
+dnf -y install golang
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
