@@ -28,7 +28,7 @@ sed -i '6,$d' /etc/grub.d/40_custom
 cat >>/etc/grub.d/40_custom  <<ENDL
 menuentry "Installer" {
 #set root=(hd0,3)
-set root=(hd0,$(df -h / | grep '/dev' | awk '{print $1}'|grep -Eo '[0-9]+'))
+set root=(hd0,$(df -h /boot | grep '/dev' | awk '{print $1}'|grep -Eo '[0-9]+'))
 linux${EFI} /vmlinuz ip=dhcp inst.text inst.vnc inst.vncpassword=PaFfW0rd inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=http://www.timectrl.net/files/fedora-kickstart-cn.txt
 initrd${EFI} /initrd.img
 }
