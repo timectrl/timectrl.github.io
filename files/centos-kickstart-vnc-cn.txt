@@ -69,7 +69,7 @@ wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/autho
 chmod 700 /home/zhangquan/.ssh
 chmod 600 /home/zhangquan/.ssh/authorized_keys
 passwd -l zhangquan
-echo 'zhangquan ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/zhangquan-root
+wget -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
