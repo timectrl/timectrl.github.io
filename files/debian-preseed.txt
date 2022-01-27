@@ -460,7 +460,7 @@ d-i preseed/late_command string \
 	in-target passwd -l zhangquan ; \
 	in-target passwd -l root ; \
 	in-target apt-get -y update ; \
-	in-target apt-get -y install vim screen tcpdump wget mtr rsync bash-completion ; \
+	in-target apt-get -y install vim screen iptables tcpdump wget mtr rsync bash-completion ; \
 	in-target sleep 1 ; \
 	sleep 1 ;
 

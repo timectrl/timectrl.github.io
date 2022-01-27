@@ -465,7 +465,7 @@ d-i preseed/late_command string \
 	sed -i s@ftp.debian.org@repo.huaweicloud.com@g /target/etc/apt/sources.list ; \
 	sed -i s@security.debian.org@repo.huaweicloud.com@g /target/etc/apt/sources.list ; \
 	in-target apt-get -y update ; \
-	in-target apt-get -y install vim screen tcpdump wget mtr rsync bash-completion ; \
+	in-target apt-get -y install vim screen iptables tcpdump wget mtr rsync bash-completion ; \
 	in-target sleep 1 ; \
 	sleep 1 ;
 
