@@ -68,11 +68,18 @@ systemctl disable firewalld.service
 systemctl disable dnf-makecache.timer
 systemctl enable sshd.service
 
-dnf -y remove PackageKit-command-not-found PackageKit-gtk3-module gnome-boxes abrt* nano-default-editor
+dnf -y remove PackageKit* gnome-boxes abrt* nano-default-editor
 
 
-dnf -y update --exclude 'kernel-*'
-dnf -y install vim vim-default-editor screen tcpdump curl wget mtr rsync bash-completion openssl less sqlite zip unzip xz
+#dnf -y update --exclude 'kernel-*'
+dnf -y install vim vim-default-editor
+dnf -y install screen openssl
+dnf -y install tcpdump curl wget mtr rsync
+dnf -y install bash-completion less sqlite
+dnf -y install zip unzip xz
+dnf -y install rdesktop vinagre
+dnf -y install gimp
+dnf -y install android-tools
 
 
 echo "alias vi='vim'" >>/root/.bashrc
@@ -92,7 +99,9 @@ echo -e "\n\n" >>/etc/rc.d/rc.local
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf -y install unrar p7zip
 #dnf -y install iproute net-tools lrzsz crontabs 
-dnf -y install golang
+dnf -y install golang mariadb
+dnf -y install make gcc patch automake libtool
+dnf -y install kernel-devel
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
