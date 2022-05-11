@@ -11,6 +11,7 @@ lang en_US.UTF-8
 
 # Use network installation
 url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os"
+#url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os"
 #url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/36/Everything/x86_64/os"
 #url --url="https://mirror.huaweicloud.com/fedora/releases/36/Everything/x86_64/os"
 #url --url="https://repo.huaweicloud.com/fedora/releases/36/Everything/x86_64/os"

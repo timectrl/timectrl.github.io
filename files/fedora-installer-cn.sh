@@ -9,7 +9,8 @@ set -x
 
 VER=36
 
-MIRROR_PREFIX=https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}/
+MIRROR_PREFIX=https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}
+MIRROR_PREFIX=https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/${VER}
 MIRROR_PREFIX=https://mirror.sjtu.edu.cn/fedora/linux/releases/${VER}
 MIRROR_PREFIX=http://mirrors.163.com/fedora/releases/${VER}
 MIRROR_PREFIX=http://mirrors.huaweicloud.com/fedora/releases/${VER}
