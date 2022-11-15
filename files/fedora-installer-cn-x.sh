@@ -7,7 +7,7 @@ fi
 
 set -x
 
-VER=36
+VER=37
 
 
 MIRROR_PREFIX=https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}
@@ -18,8 +18,8 @@ MIRROR_PREFIX=https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}
 #MIRROR_PREFIX=http://repo.huaweicloud.com/fedora/releases/${VER}
 
 PREFIX=$(df -h /boot/|grep dev|awk '{print $6}')
-wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/Everything/x86_64/os/isolinux/vmlinuz
-wget -O ${PREFIX}/initrd.img ${MIRROR_PREFIX}/Everything/x86_64/os/isolinux/initrd.img
+wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/Everything/x86_64/os/images/pxeboot/vmlinuz
+wget -O ${PREFIX}/initrd.img ${MIRROR_PREFIX}/Everything/x86_64/os/images/pxeboot/initrd.img
 
 EFI=""
 if [ -f /sys/firmware/efi/runtime ]

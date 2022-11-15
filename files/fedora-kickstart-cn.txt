@@ -10,11 +10,11 @@ keyboard --vckeymap=us --xlayouts='us'
 lang en_US.UTF-8
 
 # Use network installation
-#url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os"
-#url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/36/Everything/x86_64/os"
-#url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/36/Everything/x86_64/os"
-#url --url="https://mirrors.huaweicloud.com/fedora/releases/36/Everything/x86_64/os"
-url --url="https://repo.huaweicloud.com/fedora/releases/36/Everything/x86_64/os"
+#url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/37/Everything/x86_64/os"
+#url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/37/Everything/x86_64/os"
+#url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/37/Everything/x86_64/os"
+#url --url="https://mirrors.huaweicloud.com/fedora/releases/37/Everything/x86_64/os"
+url --url="https://repo.huaweicloud.com/fedora/releases/37/Everything/x86_64/os"
 
 %packages
 #@^workstation-product-environment
@@ -69,16 +69,18 @@ systemctl disable firewalld.service
 systemctl disable dnf-makecache.timer
 systemctl enable sshd.service
 
-dnf -y remove PackageKit* gnome-boxes abrt* nano-default-editor
-
-
-#dnf -y update --exclude 'kernel-*'
+dnf -y remove PackageKit* abrt*
+dnf -y remove gnome-boxes NetworkManager-config-connectivity-fedora
+dnf -y remove nano-default-editor
 dnf -y install vim vim-default-editor
+
+
 dnf -y install screen openssl
 dnf -y install tcpdump curl wget mtr rsync
 dnf -y install bash-completion less sqlite
 dnf -y install zip unzip xz
 
+#dnf -y update --exclude 'kernel-*'
 
 echo "alias vi='vim'" >>/root/.bashrc
 
@@ -96,10 +98,14 @@ echo -e "\n\n" >>/etc/rc.d/rc.local
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf -y install unrar p7zip
-dnf -y install iproute net-tools lrzsz crontabs 
 dnf -y install golang mariadb
 dnf -y install make gcc patch automake libtool
 dnf -y install kernel-devel libcurl-devel
+
+
+
+
+dnf -y install iproute net-tools lrzsz crontabs 
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
