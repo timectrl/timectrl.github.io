@@ -76,8 +76,8 @@ dnf -y install vim vim-default-editor
 
 
 dnf -y install screen openssl
-dnf -y install tcpdump curl wget mtr rsync
-dnf -y install bash-completion less sqlite
+dnf -y install tcpdump curl wget mtr rsync wireguard-tool
+dnf -y install bash-completion less sqlite tree
 dnf -y install zip unzip xz
 
 #dnf -y update --exclude 'kernel-*'
