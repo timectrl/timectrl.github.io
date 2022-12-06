@@ -94,6 +94,15 @@ echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n" >>/etc/rc.d/rc.local
 echo "exit 0" >>/etc/rc.d/rc.local
 echo -e "\n\n" >>/etc/rc.d/rc.local
 
+cat > /etc/ssh/ssh_config.d/90-ZQ.conf <<ENDL
+Host *
+  TCPKeepAlive yes
+  ServerAliveInterval 15
+  ForwardAgent yes
+  PubkeyAcceptedKeyTypes +ssh-rsa
+  HostKeyAlgorithms +ssh-rsa
+ENDL
+
 
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
