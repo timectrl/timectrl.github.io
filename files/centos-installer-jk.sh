@@ -11,10 +11,13 @@ set -x
 MIRROR_PREFIX=http://mirror.centos.org/centos/8-stream
 MIRROR_PREFIX=https://mirrors.huaweicloud.com/centos/8-stream
 MIRROR_PREFIX=https://repo.huaweicloud.com/centos/8-stream
+MIRROR_PREFIX=https://mirror.stream.centos.org/9-stream
 
 PREFIX=$(df -h /boot/|grep dev|awk '{print $6}')
-wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/BaseOS/x86_64/os/isolinux/vmlinuz
-wget -O ${PREFIX}/initrd.img ${MIRROR_PREFIX}/BaseOS/x86_64/os/isolinux/initrd.img
+#wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/BaseOS/x86_64/os/isolinux/vmlinuz
+#wget -O ${PREFIX}/initrd.img ${MIRROR_PREFIX}/BaseOS/x86_64/os/isolinux/initrd.img
+wget -O ${PREFIX}/vmlinuz ${MIRROR_PREFIX}/BaseOS/x86_64/os/images/pxeboot/vmlinuz
+wget -O ${PREFIX}/initrd.img ${MIRROR_PREFIX}/BaseOS/x86_64/os/images/pxeboot/initrd.img
 
 EFI=""
 if [ -f /sys/firmware/efi/runtime ]
