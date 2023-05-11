@@ -71,6 +71,8 @@ chmod 600 /home/zhangquan/.ssh/authorized_keys
 passwd -l zhangquan
 wget -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
 
+echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio"' >/etc/dracut.conf.d/virtio.conf
+#rpm -q kernel|sed -e 's/^kernel-//g'|xargs -i dracut -f /boot/initramfs-{}.img {}
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
 

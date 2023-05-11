@@ -104,6 +104,9 @@ Host *
 ENDL
 
 
+echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio"' >/etc/dracut.conf.d/virtio.conf
+#rpm -q kernel|sed -e 's/^kernel-//g'|xargs -i dracut -f /boot/initramfs-{}.img {}
+
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf -y install unrar p7zip
@@ -120,6 +123,7 @@ dnf -y install iproute net-tools lrzsz crontabs
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
 
 rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
+dnf clean all
 %end
 
 

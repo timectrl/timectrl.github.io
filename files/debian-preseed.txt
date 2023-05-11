@@ -460,6 +460,8 @@ d-i preseed/late_command string \
 	chmod 600 /target/root/.ssh/authorized_keys ; \
 	in-target passwd -l zhangquan ; \
 	in-target passwd -l root ; \
+	in-target sed -i '$a\\n\nvirtio_blk\nvirtio_scsi\nvirtio_net\nvirtio_pci\nvirtio_ring\nvirtio\n\n' /etc/initramfs-tools/modules; \
+	in-target update-initramfs -u ; \
 	in-target apt-get -y update ; \
 	in-target apt-get -y install vim screen iptables tcpdump wget mtr rsync bash-completion ; \
 	in-target sleep 1 ; \
