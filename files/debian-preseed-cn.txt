@@ -448,6 +448,7 @@ d-i finish-install/reboot_in_progress note
 d-i preseed/late_command string \
 	wget -O - http://www.timectrl.net/files/debian-fix-efi-boot.sh | /bin/sh ; \
 	wget -O - http://www.timectrl.net/files/debian-fix-rc-local.sh | /bin/sh ; \
+	wget -O - http://www.timectrl.net/files/debian-fix-virtio.sh   | /bin/sh ; \
 	wget -O /target/etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan ; \
 	mkdir -p /target/home/zhangquan/.ssh ; \
 	wget -O /target/home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys ; \
@@ -460,12 +461,10 @@ d-i preseed/late_command string \
 	chmod 600 /target/root/.ssh/authorized_keys ; \
 	in-target passwd -l zhangquan ; \
 	in-target passwd -l root ; \
-	in-target sed -i '$a\\n\nvirtio_blk\nvirtio_scsi\nvirtio_net\nvirtio_pci\nvirtio_ring\nvirtio\n\n' /etc/initramfs-tools/modules; \
-	in-target update-initramfs -u ; \
 	cp /target/etc/apt/sources.list /target/etc/apt/sources.list.origin ; \
-	sed -i s@deb.debian.org@repo.huaweicloud.com@g /target/etc/apt/sources.list ; \
-	sed -i s@ftp.debian.org@repo.huaweicloud.com@g /target/etc/apt/sources.list ; \
-	sed -i s@security.debian.org@repo.huaweicloud.com@g /target/etc/apt/sources.list ; \
+	sed -i 's@/deb.debian.org/@/cdn-aws.deb.debian.org/@g' /target/etc/apt/sources.list ; \
+	sed -i 's@/ftp.debian.org/@/cdn-aws.deb.debian.org/@g' /target/etc/apt/sources.list ; \
+	sed -i 's@/security.debian.org/@/cdn-aws.deb.debian.org/@g' /target/etc/apt/sources.list ; \
 	in-target apt-get -y update ; \
 	in-target apt-get -y install vim screen iptables tcpdump wget mtr rsync bash-completion ; \
 	in-target sleep 1 ; \
