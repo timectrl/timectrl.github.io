@@ -13,7 +13,7 @@ lang en_US.UTF-8
 #url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/38/Everything/x86_64/os"
 #url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/38/Everything/x86_64/os"
 #url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/38/Everything/x86_64/os"
-url --url="=http://mirrors.163.com/fedora/releases/38/Everything/x86_64/os"
+url --url="http://mirrors.163.com/fedora/releases/38/Everything/x86_64/os"
 #url --url="https://mirrors.huaweicloud.com/fedora/releases/38/Everything/x86_64/os"
 #url --url="https://repo.huaweicloud.com/fedora/releases/38/Everything/x86_64/os"
 
@@ -77,9 +77,9 @@ dnf -y install vim vim-default-editor
 
 
 dnf -y install screen openssl
-dnf -y install tcpdump curl wget mtr rsync wireguard-tool
+dnf -y install curl mtr rsync tcpdump wireguard-tools
 dnf -y install bash-completion less sqlite tree
-dnf -y install zip unzip xz
+dnf -y install zip unzip bzip2 xz
 
 #dnf -y update --exclude 'kernel-*'
 
@@ -112,13 +112,13 @@ echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring vir
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf -y install unrar p7zip
 dnf -y install golang mariadb
-dnf -y install make gcc patch automake libtool
+dnf -y install make gcc patch diff automake libtool
 dnf -y install kernel-devel libcurl-devel
 
 
 
 
-dnf -y install iproute net-tools lrzsz crontabs 
+dnf -y install iproute net-tools lrzsz crontabs
 
 
 #dnf -y install http://static.jikedata.com/rpm/proton.rpm
