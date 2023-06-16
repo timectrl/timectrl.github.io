@@ -17,6 +17,10 @@ sed -i '/#pool/apool 11.2.4.1 iburst' /etc/chrony.conf
 sed -i '$a\\nproxy=http://11.2.4.1:8080\n' /etc/dnf/dnf.conf
 
 
+# proton hosts
+sed -i '$a\\n11.2.5.251  proton.jikedata.com\n' /etc/hosts
+
+
 # minio
 wget -O /usr/local/bin/mc https://dl.min.io/client/mc/release/linux-amd64/mc
 chmod +x /usr/local/bin/mc
@@ -68,4 +72,6 @@ rm -fr /home/USER
 # clean log
 find /var/log -type f |xargs rm -fr
 
+
+exit 
 

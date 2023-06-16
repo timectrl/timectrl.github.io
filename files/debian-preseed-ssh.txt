@@ -98,6 +98,7 @@ d-i mirror/protocol string http
 #d-i mirror/country string "China"
 d-i mirror/country string "United States"
 d-i mirror/http/hostname string deb.debian.org
+#d-i mirror/http/hostname string cdn-aws.deb.debian.org
 #d-i mirror/http/hostname string ftp.us.debian.org
 #d-i mirror/http/hostname string ftp.cn.debian.org
 #d-i mirror/http/hostname string mirrors.huaweicloud.com
@@ -341,7 +342,7 @@ tasksel tasksel/first multiselect standard
 
 # Individual additional packages to install
 #d-i pkgsel/include string openssh-server build-essential
-d-i pkgsel/include string openssh-server coreutils sudo bash-completion vim screen wget curl
+d-i pkgsel/include string openssh-server coreutils sudo bash-completion vim screen wget curl rsync tcpdump iptables
 # Whether to upgrade packages after debootstrap.
 # Allowed values: none, safe-upgrade, full-upgrade
 d-i pkgsel/upgrade select none
@@ -461,8 +462,7 @@ d-i preseed/late_command string \
 	chmod 600 /target/root/.ssh/authorized_keys ; \
 	in-target passwd -l zhangquan ; \
 	in-target passwd -l root ; \
-	in-target apt-get -y update ; \
-	in-target apt-get -y install vim screen iptables tcpdump wget mtr rsync bash-completion ; \
+	cp /target/etc/apt/sources.list /target/etc/apt/sources.list.origin ; \
 	in-target sleep 1 ; \
 	sleep 1 ;
 

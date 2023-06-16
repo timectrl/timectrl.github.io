@@ -8,8 +8,8 @@ fi
 set -x
 
 PREFIX=$(df -h /boot/|grep dev|awk '{print $6}')
-wget -O ${PREFIX}/linux http://repo.huaweicloud.com/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
-wget -O ${PREFIX}/initrd.gz http://repo.huaweicloud.com/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+wget -O ${PREFIX}/linux http://cdn-aws.deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/linux
+wget -O ${PREFIX}/initrd.gz http://cdn-aws.deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/debian-installer/amd64/initrd.gz
 
 EFI=""
 if [ -f /sys/firmware/efi/runtime ]
