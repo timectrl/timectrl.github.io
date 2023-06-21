@@ -52,19 +52,19 @@ user --groups=wheel --name=zhangquan --password=$y$j9T$wHJ30tX9CtKAZQFPIxO2h.$HZ
 dnf -y install wget
 
 mkdir -p /root/.ssh
-wget -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+wget -q -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
 chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 passwd -l root
 
 mkdir -p /home/zhangquan/.ssh
-wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+wget -q -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
 chown -R zhangquan:zhangquan /home/zhangquan/
 chmod 700 /home/zhangquan/.ssh
 chmod 600 /home/zhangquan/.ssh/authorized_keys
 passwd -l zhangquan
 
-wget -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
+wget -q -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
 
 systemctl disable firewalld.service
 systemctl disable dnf-makecache.timer
