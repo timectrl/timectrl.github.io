@@ -22,9 +22,9 @@ cat >>/etc/grub.d/40_custom  <<ENDL
 menuentry "Installer" {
 #set root=(hd0,3)
 set root=(hd0,$(df -h /boot | grep '/dev' | awk '{print $1}'|grep -Eo '[0-9]+'))
-#linuxefi /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain auto file=/hd-media/boot/preseed.txt
-#linuxefi /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain auto url=http://www.timectrl.net/files/debian-preseed.txt modules=network-console
-linux${EFI} /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain auto url=http://www.timectrl.net/files/debian-preseed-ssh.txt
+#linuxefi /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain lowmem/low=true auto file=/hd-media/boot/preseed.txt
+#linuxefi /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain lowmem/low=true auto url=http://www.timectrl.net/files/debian-preseed.txt modules=network-console
+linux${EFI} /linux language=en country=US locale=en_US.UTF-8 keymap=us hostname=debian-fresh domain=localhost.localdomain lowmem/low=true auto url=http://www.timectrl.net/files/debian-preseed-ssh.txt
 initrd${EFI} /initrd.gz
 }
 ENDL

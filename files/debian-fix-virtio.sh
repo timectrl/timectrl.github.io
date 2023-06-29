@@ -12,7 +12,7 @@ sed -i '$avirtio'            /target/etc/initramfs-tools/modules
 sed -i '$a# virtio end'      /target/etc/initramfs-tools/modules
 sed -i '$s/^.*$/&\n\n\n/g'   /target/etc/initramfs-tools/modules
 
-#in-target update-initramfs -u
+update-initramfs -u || true
 
 
 exit 0
