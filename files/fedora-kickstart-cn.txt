@@ -12,10 +12,10 @@ lang en_US.UTF-8
 # Use network installation
 #url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/os"
 #url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/os"
-url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/39/Everything/x86_64/os"
+#url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/39/Everything/x86_64/os"
 #url --url="http://mirrors.163.com/fedora/releases/39/Everything/x86_64/os"
 #url --url="https://mirrors.huaweicloud.com/fedora/releases/39/Everything/x86_64/os"
-#url --url="https://repo.huaweicloud.com/fedora/releases/39/Everything/x86_64/os"
+url --url="https://repo.huaweicloud.com/fedora/releases/39/Everything/x86_64/os"
 
 %packages
 #@^workstation-product-environment
@@ -77,7 +77,7 @@ dnf -y install vim vim-default-editor
 
 
 dnf -y install screen openssl
-dnf -y install curl mtr rsync tcpdump wireguard-tools
+dnf -y install curl telnet ftp mtr rsync tcpdump wireguard-tools
 dnf -y install bash-completion less sqlite tree
 dnf -y install zip unzip bzip2 xz
 
