@@ -40,7 +40,7 @@ skipx
 timezone Asia/Shanghai --isUtc
 
 #Root password
-rootpw --plaintext PaffW0rD
+rootpw --lock
 user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
 
 
@@ -61,39 +61,19 @@ pwpolicy luks --minlen=6 --minquality=1 --notstrict --nochanges --notempty
 dnf -y install wget
 
 mkdir -p /root/.ssh
-wget -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+wget -q -O /root/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
 chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 passwd -l root
 
 mkdir -p /home/zhangquan/.ssh
-wget -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+wget -q -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
 chown -R zhangquan:zhangquan /home/zhangquan/
 chmod 700 /home/zhangquan/.ssh
 chmod 600 /home/zhangquan/.ssh/authorized_keys
 passwd -l zhangquan
 
-wget -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
-
-systemctl disable firewalld.service
-systemctl disable dnf-makecache.timer
-systemctl enable sshd.service
-
-dnf -y remove PackageKit* abrt*
-dnf -y remove gnome-boxes NetworkManager-config-connectivity-fedora
-dnf -y remove nano-default-editor
-dnf -y install vim vim-default-editor
-
-
-dnf -y install screen openssl
-dnf -y install tcpdump curl wget mtr rsync wireguard-tool
-dnf -y install bash-completion less sqlite tree
-dnf -y install zip unzip xz
-
-#dnf -y update --exclude 'kernel-*'
-
-echo "alias vi='vim'" >>/root/.bashrc
-
+wget -q -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
 
 
 touch /etc/rc.d/rc.local
@@ -107,7 +87,7 @@ echo -e "\n\n" >>/etc/rc.d/rc.local
 cat > /etc/ssh/ssh_config.d/90-ZQ.conf <<ENDL
 Host *
   TCPKeepAlive yes
-  ServerAliveInterval 15
+  ServerAliveInterval 23
   ForwardAgent yes
   PubkeyAcceptedKeyTypes +ssh-rsa
   HostKeyAlgorithms +ssh-rsa
@@ -118,17 +98,37 @@ echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring vir
 #rpm -q kernel|sed -e 's/^kernel-//g'|xargs -i dracut -f /boot/initramfs-{}.img {}
 
 
-dnf -y install golang mariadb
-dnf -y install make gcc patch automake libtool
+systemctl disable firewalld.service
+systemctl disable dnf-makecache.timer
+systemctl enable sshd.service
+
+dnf -y remove PackageKit* abrt*
+dnf -y remove gnome-boxes NetworkManager-config-connectivity-fedora
+dnf -y remove nano-default-editor
+dnf -y install vim vim-default-editor
+echo "alias vi='vim'" >>/root/.bashrc
+
+
+
+
+
+
+
+dnf -y install screen openssl bash-completion less sqlite tree crontabs
+dnf -y install wget curl telnet ftp mtr rsync tcpdump wireguard-tools iproute net-tools lrzsz
+dnf -y install zip unzip tar gzip bzip2 xz p7zip
+dnf -y install make gcc patch diff automake libtool pkgconf-pkg-config git
 dnf -y install kernel-devel libcurl-devel
 
 
 
+dnf -y install golang mariadb
 
-dnf -y install iproute net-tools lrzsz crontabs 
 
 
-#dnf -y install http://static.jikedata.com/rpm/proton.rpm
+
+
+
 
 rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
 dnf clean all
