@@ -4,27 +4,77 @@
 # Use graphical install
 graphical
 
+%pre
+VER="39"
+MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
+MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
+MIRROR_PREFIX="http://mirrors.tuna.tsinghua.edu.cn/fedora/releases/${VER}" # 清华大学
+MIRROR_PREFIX="http://mirrors.ustc.edu.cn/fedora/releases/${VER}" # 中国科学技术大学
+MIRROR_PREFIX="http://mirror.sjtu.edu.cn/fedora/linux/releases/${VER}" # 上海交通大学
+MIRROR_PREFIX="http://mirror.nju.edu.cn/fedora/releases/${VER}" # 南京大学
+MIRROR_PREFIX="http://mirror.lzu.edu.cn/fedora/releases/${VER}" # 兰州大学
+MIRROR_PREFIX="http://mirrors.163.com/fedora/releases/${VER}" # 163
+MIRROR_PREFIX="http://mirrors.cloud.tencent.com/fedora/releases/${VER}" # 腾讯云
+MIRROR_PREFIX="http://mirrors.aliyun.com/fedora/releases/${VER}" # 阿里云
+MIRROR_PREFIX="http://mirrors.huaweicloud.com/fedora/releases/${VER}" # 华为云
+MIRROR_PREFIX="http://repo.huaweicloud.com/fedora/releases/${VER}" # 华为云
+echo "url --url=${MIRROR_PREFIX}/Everything/x86_64/os" >/tmp/mirrorURL.txt
+%end
+
+
 # Keyboard layouts
 keyboard --vckeymap=us --xlayouts='us'
 # System language
 lang en_US.UTF-8
 
 # Use network installation
-#url --url="https://dl.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/os"
-#url --url="https://download-cc-rdu01.fedoraproject.org/pub/fedora/linux/releases/39/Everything/x86_64/os"
-url --url="https://mirror.sjtu.edu.cn/fedora/linux/releases/39/Everything/x86_64/os"
-#url --url="http://mirrors.163.com/fedora/releases/39/Everything/x86_64/os"
-#url --url="https://mirrors.huaweicloud.com/fedora/releases/39/Everything/x86_64/os"
-#url --url="https://repo.huaweicloud.com/fedora/releases/39/Everything/x86_64/os"
+%include /tmp/mirrorURL.txt
 
 %packages
 @^workstation-product-environment
 #@^minimal-environment
 
+screen
+crontabs
+openssl
+bash-completion
+less
+sqlite
+tree
+wget
+curl
+telnet
+ftp
+mtr
+rsync
+tcpdump
+wireguard-tools
+iproute
+net-tools
+lrzsz
+zip
+unzip
+tar
+gzip
+bzip2
+xz
+p7zip
+make
+gcc
+patch
+diffutils
+automake
+libtool
+pkgconf-pkg-config
+git
+kernel-devel
+libcurl-devel
+
 %end
 
 # SELinux configuration
 selinux --disabled
+firewall --disabled
 
 # Run the Setup Agent on first boot
 firstboot --enable
@@ -105,7 +155,7 @@ Host *
 ENDL
 
 
-#echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio"' >/etc/dracut.conf.d/virtio.conf
+echo 'add_drivers+="virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring virtio"' >/etc/dracut.conf.d/virtio.conf
 #rpm -q kernel|sed -e 's/^kernel-//g'|xargs -i dracut -f /boot/initramfs-{}.img {}
 
 
@@ -122,22 +172,12 @@ echo "alias vi='vim'" >>/root/.bashrc
 
 
 
-
-
-
-dnf -y install screen openssl bash-completion less sqlite tree crontabs
-dnf -y install wget curl telnet ftp mtr rsync tcpdump wireguard-tools iproute net-tools lrzsz
-dnf -y install zip unzip tar gzip bzip2 xz p7zip
-dnf -y install make gcc patch diffutils automake libtool pkgconf-pkg-config git
-dnf -y install kernel-devel libcurl-devel
-
 #dnf -y update --exclude 'kernel-*'
 
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 dnf -y install unrar
 
-dnf -y install golang mariadb
-
+#dnf -y install golang mariadb
 
 dnf -y install rdesktop vinagre
 dnf -y install gimp
