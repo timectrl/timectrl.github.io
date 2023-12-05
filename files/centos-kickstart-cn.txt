@@ -117,7 +117,7 @@ echo "alias vi='vim'" >>/root/.bashrc
 dnf -y install screen openssl bash-completion less sqlite tree crontabs
 dnf -y install wget curl telnet ftp mtr rsync tcpdump wireguard-tools iproute net-tools lrzsz
 dnf -y install zip unzip tar gzip bzip2 xz p7zip
-dnf -y install make gcc patch diff automake libtool pkgconf-pkg-config git
+dnf -y install make gcc patch diffutils automake libtool pkgconf-pkg-config git
 dnf -y install kernel-devel libcurl-devel
 
 
