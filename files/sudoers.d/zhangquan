@@ -1,2 +1,2 @@
-Defaults    secure_path = /sandisk/WorkSpace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/snapd/snap/bin
+Defaults    secure_path = /run/sandisk/WorkSpace/bin:/home/zhangquan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/lib/snapd/snap/bin
 zhangquan ALL=(ALL) NOPASSWD: ALL
