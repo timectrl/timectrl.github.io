@@ -35,6 +35,7 @@ ENDL
 # proton
 sed -i -e '/^HTTP_PROXY.*$/HTTP_PROXY=http:\/\/11.2.4.1:8080/g' /etc/proton/proton.ini
 rm -fr /etc/proton/serverId
+rm -fr /etc/sudoers.d/zhangquan
 
 
 # root bash_history
@@ -50,14 +51,44 @@ After=network.target
 [Service]
 Type=simple
 ExecStart=/usr/local/bin/node_exporter
-ExecStop=/bin/kill -9 ${MAINPID}
+ExecStop=/bin/kill -9 \${MAINPID}
 
 [Install]
 WantedBy=multi-user.target
 ENDL
 systemctl enable PrometheusNodeExporter
-#wget https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-amd64.tar.gz
+#wget https://github.com/prometheus/node_exporter/releases/download/v1.8.1/node_exporter-1.8.1.linux-amd64.tar.gz
 
+
+# Set limits for work user
+cat >/etc/security/limits.d/90-work.conf <<ENDL
+work    hard    nofile           9999999
+work    soft    nofile           9999999
+ENDL
+
+
+# set iptables notrack
+cat >>/etc/rc.local <<ENDL
+for port in 80 443 21980
+do
+	iptables -t raw -A PREROUTING -p tcp --dport \$port -j NOTRACK
+	iptables -t raw -A OUTPUT -p tcp --sport \$port -j NOTRACK
+done
+
+sysctl net.ipv4.tcp_fin_timeout=3
+sysctl net.ipv4.tcp_tw_recycle=1
+sysctl net.ipv4.tcp_tw_reuse=1
+sysctl net.ipv4.tcp_max_syn_backlog=5120
+sysctl net.ipv4.tcp_syn_retries=3
+sysctl net.ipv4.tcp_synack_retries=3
+sysctl net.ipv4.tcp_max_syn_backlog=65536
+sysctl net.core.wmem_max=8388608
+sysctl net.core.rmem_max=8388608
+sysctl net.core.somaxconn=4094
+sysctl net.core.optmem_max=81920
+sysctl net.ipv4.tcp_syncookies=0
+
+ENDL
 
 
 # clean dnf
