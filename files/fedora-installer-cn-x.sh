@@ -40,13 +40,16 @@ fi
 sed -i '6,$d' /etc/grub.d/40_custom
 cat >>/etc/grub.d/40_custom  <<ENDL
 menuentry "Installer" {
+linux${EFI} /vmlinuz ip=dhcp root=UUID=${ROOT_UUID} inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=http://www.timectrl.net/files/fedora-kickstart-cn-x.txt
+
 #set root=(hd0,3)
-set root=(hd0,$(df -h /boot | grep '/dev' | awk '{print $1}'|grep -Eo '[0-9]+'))
+#set root=(hd0,$(df -h /boot | grep '/dev' | awk '{print $1}'|grep -Eo '[0-9]+'))
 #linux${EFI} /vmlinuz ip=dhcp inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=http://www.timectrl.net/files/fedora-kickstart-cn-x.txt
 #linux${EFI} /vmlinuz ip=dhcp inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=hd:${ROOT_DEVICE}:/kickstart-x.txt
 #linux${EFI} /vmlinuz ip=dhcp inst.repo=hd:${ROOT_DEVICE}:/ inst.ks=hd:${ROOT_DEVICE}:/kickstart-x.txt
-linux${EFI} /vmlinuz ip=dhcp inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=hd:UUID=${ROOT_UUID}:/kickstart-x.txt
+#linux${EFI} /vmlinuz ip=dhcp inst.repo=${MIRROR_PREFIX}/Everything/x86_64/os inst.ks=hd:UUID=${ROOT_UUID}:/kickstart-x.txt
 #linux${EFI} /vmlinuz ip=dhcp inst.repo=hd:UUID=${ROOT_UUID}:/ inst.ks=hd:UUID=${ROOT_UUID}:/kickstart-x.txt
+
 initrd${EFI} /initrd.img
 }
 ENDL
