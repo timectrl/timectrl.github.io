@@ -97,11 +97,21 @@ dnf clean all
 
 
 # clean USER
+sed -i '/zhangquan/d' /etc/passwd /etc/shadow /etc/group /etc/subuid /etc/subgid /etc/gshadow
+rm -fr /etc/passwd- /etc/shadow- /etc/group- /etc/subuid- /etc/subgid- /etc/gshadow-
+rm -fr /home/zhangquan
 rm -fr /home/USER
 
 
 # clean log
 find /var/log -type f |xargs rm -fr
+find /var/spool/mail -type f |xargs rm -fr
+journalctl --rotate
+journalctl --vacuum-time=1s
+journalctl --vacuum-size=1K --vacuum-files=1
+journalctl --vacuum-files=1
+journalctl --vacuum-time=1s --vacuum-size=1K --vacuum-files=1
+journalctl --update-catalog
 
 
 exit 
