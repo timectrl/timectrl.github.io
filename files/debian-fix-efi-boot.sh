@@ -1,11 +1,12 @@
 #!/bin/sh
 
+# in-target bash -c '( echo "grub-efi-amd64 grub2/force_efi_extra_removable boolean true" | debconf-set-selections; )'
+
 if [ -f /sys/firmware/efi/runtime ]
 then
-	mkdir -p /target/boot/efi/EFI/boot
-	cp /target/boot/efi/EFI/debian/grubx64.efi /target/boot/efi/EFI/boot/bootx64.efi
-	#in-target bash -c '( echo "grub-efi-amd64 grub2/force_efi_extra_removable boolean true" | debconf-set-selections; )'
-	echo "grub-efi-amd64 grub2/force_efi_extra_removable boolean true" | in-target debconf-set-selections
+	chroot /target mkdir -p /boot/efi/EFI/boot
+	chroot /target cp /boot/efi/EFI/debian/grubx64.efi /boot/efi/EFI/boot/bootx64.efi
+	chroot /target sh -c 'echo "grub-efi-amd64 grub2/force_efi_extra_removable boolean true" | debconf-set-selections'
 fi
 
 

@@ -5,10 +5,6 @@ graphical
 #repo --name="AppStream" --baseurl=https://repo.huaweicloud.com/centos/8-stream/AppStream/x86_64/os
 repo --name="AppStream" --baseurl=https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os
 
-%packages
-@^minimal-environment
-
-%end
 
 # Keyboard layouts
 keyboard --vckeymap=us --xlayouts='us'
@@ -22,26 +18,35 @@ network  --hostname=localhost.localdomain
 #url --url="https://repo.huaweicloud.com/centos/8-stream/BaseOS/x86_64/os"
 url --url="https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os"
 
+%packages
+@^minimal-environment
+%end
+
 # SELinux configuration
 selinux --disabled
+firewall --disabled
 
 # Run the Setup Agent on first boot
 firstboot --enable
 # Do not configure the X Window System
 skipx
 
-ignoredisk --only-use=vda
+# Generated using Blivet version 3.3.3
+#ignoredisk --only-use=vda
 # Partition clearing information
-clearpart --all --drives=vda
+clearpart --none --initlabel
 # Disk partitioning information
-part / --fstype="xfs" --ondisk=vda --size=10240 --grow
+#part / --fstype="xfs"
+#part /boot/efi --fstype="efi" --ondisk=vda --size=128   --fsoptions="umask=0077,shortname=winnt"
+#part /         --fstype="xfs" --ondisk=vda --size=10240 --grow
 
 # System timezone
-timezone Asia/Shanghai --isUtc
+#timezone Asia/Shanghai --isUtc
+timezone Asia/Shanghai
 
 #Root password
 rootpw --lock
-user --groups=wheel --name=zhangquan --password=$6$DXQnOz1xnvfeqqay$8HNRDj6aoe0mx7AfF3Rf1iWgXIBAx2TCbtqruCK.Nsb99rWVJI8uRtM0b7h9F4mXEK3iOmiEo7vD7Aztt1KZP/ --iscrypted --gecos="zhangquan"
+user --groups=wheel --name=zhangquan --password=$y$j9T$wHJ30tX9CtKAZQFPIxO2h.$HZ3sl1JxnM3wyCGKp.LSMBUM/wZoMS/ezU2Y2IoqVf3 --iscrypted --gecos="ZhangQuan"
 
 
 
@@ -76,6 +81,10 @@ passwd -l zhangquan
 wget -q -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
 
 
+
+
+
+
 touch /etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 ln -s /etc/rc.d/rc.local /etc/rc.local
@@ -100,37 +109,29 @@ echo 'add_drivers+=" virtio_blk virtio_scsi virtio_net virtio_pci virtio_ring vi
 
 systemctl disable firewalld.service
 systemctl disable dnf-makecache.timer
+systemctl disable kdump.service
 systemctl enable sshd.service
 
 dnf -y remove PackageKit* abrt*
-dnf -y remove gnome-boxes NetworkManager-config-connectivity-fedora
 dnf -y remove nano-default-editor
 dnf -y install vim vim-default-editor
 echo "alias vi='vim'" >>/root/.bashrc
 
+dnf -y install epel-release
+dnf -y install screen openssl iproute
+dnf -y install bash-completion less sqlite tree
+dnf -y install tar gzip bzip2 xz zip unzip unrar p7zip
+dnf -y install curl wget telnet ftp mtr rsync tcpdump
+dnf -y install wireguard-tools openvpn
+
+
+#dnf -y update --exclude 'kernel-*'
 
 
 
 
 
-
-dnf -y install screen openssl bash-completion less sqlite tree crontabs
-dnf -y install wget curl telnet ftp mtr rsync tcpdump wireguard-tools iproute net-tools lrzsz
-dnf -y install zip unzip tar gzip bzip2 xz p7zip
-dnf -y install make gcc patch diffutils automake libtool pkgconf-pkg-config git
-dnf -y install kernel-devel libcurl-devel
-
-
-
-dnf -y install golang mariadb
-
-
-
-
-
-
-
-rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
+#rm -fr /root/original-ks.cfg /root/anaconda-ks.cfg /root/init.log
 dnf clean all
 %end
 
