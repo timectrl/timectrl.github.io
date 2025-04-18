@@ -7,7 +7,7 @@ fi
 
 set -x
 
-VER=41
+VER=42
 
 #MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
 MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
