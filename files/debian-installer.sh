@@ -7,15 +7,27 @@ fi
 
 set -x
 
-MIRROR_PREFIX="http://deb.debian.org/debian"
-MIRROR_PREFIX="http://ftp.debian.org/debian"
-MIRROR_PREFIX="http://ftp.us.debian.org/debian"
-MIRROR_PREFIX="http://ftp.cn.debian.org/debian"
-MIRROR_PREFIX="http://cdn-aws.deb.debian.org/debian"
 
+VER="bookworm"
+VER="trixie"
 VER=stable
 
-MIRROR_PREFIX="${MIRROR_PREFIX}/${VER}"
+MIRROR_PREFIX="http://ftp.debian.org/debian/dists/${VER}" # 官方
+MIRROR_PREFIX="http://deb.debian.org/debian/dists/${VER}" # 官方
+MIRROR_PREFIX="http://cdn-fastly.deb.debian.org/debian/dists/${VER}" # 官方CDN
+MIRROR_PREFIX="http://ftp.us.debian.org/debian/dists/${VER}" # 官方国别
+MIRROR_PREFIX="http://cdn-aws.deb.debian.org/debian/dists/${VER}" # AWS CDN
+MIRROR_PREFIX="http://mirrors.tuna.tsinghua.edu.cn/debian/dists/${VER}" # 清华大学
+MIRROR_PREFIX="http://mirrors.ustc.edu.cn/debian/dists/${VER}" # 中国科学技术大学
+MIRROR_PREFIX="http://mirror.sjtu.edu.cn/debian/dists/${VER}" # 上海交通大学
+MIRROR_PREFIX="http://mirror.nju.edu.cn/debian/dists/${VER}" # 南京大学
+MIRROR_PREFIX="http://mirror.lzu.edu.cn/debian/dists/${VER}" # 兰州大学
+MIRROR_PREFIX="http://mirrors.163.com/debian/dists/${VER}" # 163
+MIRROR_PREFIX="http://mirrors.cloud.tencent.com/debian/dists/${VER}" # 腾讯云
+MIRROR_PREFIX="http://mirrors.aliyun.com/debian/dists/${VER}" # 阿里云
+MIRROR_PREFIX="http://mirrors.huaweicloud.com/debian/dists/${VER}" # 华为云
+MIRROR_PREFIX="http://repo.huaweicloud.com/debian/dists/${VER}" # 华为云
+
 
 ROOT_PREFIX=$(df -h /boot/|grep dev|head -n 1|awk '{print $6}')
 ROOT_DEVICE=$(df -h /boot/|grep dev|head -n 1|awk '{print $1}')
