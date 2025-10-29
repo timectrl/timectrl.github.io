@@ -5,7 +5,7 @@
 graphical
 
 %pre
-VER="42"
+VER="43"
 MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
 MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
 #MIRROR_PREFIX="http://mirrors.tuna.tsinghua.edu.cn/fedora/releases/${VER}" # 清华大学
