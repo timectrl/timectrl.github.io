@@ -6,10 +6,10 @@ graphical
 
 %pre
 VER="43"
-MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
-MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
+#MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
+#MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
 #MIRROR_PREFIX="http://mirrors.tuna.tsinghua.edu.cn/fedora/releases/${VER}" # 清华大学
-#MIRROR_PREFIX="http://mirrors.ustc.edu.cn/fedora/releases/${VER}" # 中国科学技术大学
+MIRROR_PREFIX="http://mirrors.ustc.edu.cn/fedora/releases/${VER}" # 中国科学技术大学
 #MIRROR_PREFIX="http://mirror.sjtu.edu.cn/fedora/linux/releases/${VER}" # 上海交通大学
 #MIRROR_PREFIX="http://mirror.nju.edu.cn/fedora/releases/${VER}" # 南京大学
 #MIRROR_PREFIX="http://mirror.lzu.edu.cn/fedora/releases/${VER}" # 兰州大学
