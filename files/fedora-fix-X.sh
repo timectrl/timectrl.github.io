@@ -30,7 +30,7 @@ sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.c
 sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.conf
 sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.conf
 
-sudo dnf -y install rdesktop vinagre
+sudo dnf -y install rdesktop freerdp vinagre
 sudo dnf -y install gimp
 sudo dnf -y install android-tools
 sudo dnf -y install --allowerasing ffmpeg mplayer
