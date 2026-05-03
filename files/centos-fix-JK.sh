@@ -35,7 +35,6 @@ ENDL
 # proton
 sed -i -e 's/HTTP_PROXY.*$/HTTP_PROXY=http:\/\/11.2.4.1:8080/g' /etc/proton/proton.ini
 rm -fr /etc/proton/serverId
-rm -fr /etc/sudoers.d/zhangquan
 
 
 # root bash_history
@@ -98,9 +97,7 @@ dnf clean all
 
 
 # clean USER
-sed -i '/zhangquan/d' /etc/passwd /etc/shadow /etc/group /etc/subuid /etc/subgid /etc/gshadow
 rm -fr /etc/passwd- /etc/shadow- /etc/group- /etc/subuid- /etc/subgid- /etc/gshadow-
-rm -fr /home/zhangquan
 rm -fr /home/USER
 
 

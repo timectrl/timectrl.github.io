@@ -5,7 +5,7 @@
 graphical
 
 %pre
-VER="43"
+VER="44"
 #MIRROR_PREFIX="https://dl.fedoraproject.org/pub/fedora/linux/releases/${VER}" # 官方
 #MIRROR_PREFIX="https://download.fedoraproject.org/pub/fedora/linux/releases/${VER}" # mirror redirect
 #MIRROR_PREFIX="http://mirrors.tuna.tsinghua.edu.cn/fedora/releases/${VER}" # 清华大学
@@ -58,7 +58,7 @@ timezone Asia/Shanghai
 
 #Root password
 rootpw --lock
-user --groups=wheel --name=zhangquan --password=$y$j9T$wHJ30tX9CtKAZQFPIxO2h.$HZ3sl1JxnM3wyCGKp.LSMBUM/wZoMS/ezU2Y2IoqVf3 --iscrypted --gecos="ZhangQuan"
+user --groups=wheel --name=user --password=$y$j9T$wHJ30tX9CtKAZQFPIxO2h.$HZ3sl1JxnM3wyCGKp.LSMBUM/wZoMS/ezU2Y2IoqVf3 --iscrypted --gecos="user"
 
 #%post --log=/root/init.log
 %post
@@ -70,14 +70,14 @@ chmod 700 /root/.ssh
 chmod 600 /root/.ssh/authorized_keys
 passwd -l root
 
-mkdir -p /home/zhangquan/.ssh
-wget -q -O /home/zhangquan/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
-chown -R zhangquan:zhangquan /home/zhangquan/
-chmod 700 /home/zhangquan/.ssh
-chmod 600 /home/zhangquan/.ssh/authorized_keys
-#passwd -l zhangquan
+mkdir -p /home/user/.ssh
+wget -q -O /home/user/.ssh/authorized_keys http://www.timectrl.net/files/authorized_keys
+chown -R user:user /home/user/
+chmod 700 /home/user/.ssh
+chmod 600 /home/user/.ssh/authorized_keys
+#passwd -l user
 
-wget -q -O /etc/sudoers.d/zhangquan http://www.timectrl.net/files/sudoers.d/zhangquan
+wget -q -O /etc/sudoers.d/user http://www.timectrl.net/files/sudoers.d/user
 
 
 
