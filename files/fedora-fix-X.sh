@@ -5,6 +5,8 @@ set -x
 
 #sudo -u gdm dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
 
+gsettings set org.gnome.Ptyxis inhibit-logout false
+sudo gsettings set org.gnome.Ptyxis inhibit-logout false
 
 dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
 sudo dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
@@ -29,6 +31,8 @@ sudo sed -i '/#HandleLidSwitchDocked=/aHandleLidSwitchDocked=ignore' /usr/lib/sy
 sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.conf
 sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.conf
 sudo sed -i '/#HandlePowerKey=/aHandlePowerKey=ignore' /usr/lib/systemd/logind.conf
+
+
 
 sudo dnf -y install rdesktop freerdp vinagre
 sudo dnf -y install gimp
