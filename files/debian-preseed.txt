@@ -462,6 +462,7 @@ d-i preseed/late_command string \
 	chmod 600 /target/home/user/.ssh/authorized_keys ; \
 	chroot /target passwd -l user ; \
 	cp /target/etc/apt/sources.list /target/etc/apt/sources.list.origin ; \
+	update-alternatives --set editor /usr/bin/vim.basic ; \
 	true
 
 

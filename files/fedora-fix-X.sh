@@ -7,6 +7,10 @@ set -x
 
 gsettings set org.gnome.Ptyxis inhibit-logout false
 sudo gsettings set org.gnome.Ptyxis inhibit-logout false
+gsettings set org.gnome.software download-updates false
+sudo gsettings set org.gnome.software download-updates false
+gsettings set org.gnome.software download-updates-notify false
+sudo gsettings set org.gnome.software download-updates-notify false
 
 dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
 sudo dbus-run-session gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 0
