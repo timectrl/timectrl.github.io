@@ -15,9 +15,9 @@ sudo dnf -y install golang
 sudo dnf -y install mariadb
 
 
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-#sudo dnf -y install code
+#sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+#echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+##sudo dnf -y install code
 
 
 #sudo tee /etc/yum.repos.d/antigravity.repo << EOL
@@ -28,4 +28,7 @@ echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com
 #gpgcheck=0
 #EOL
 ##sudo dnf install antigravity
+
+#curl -fsSL https://antigravity.google/cli/install.sh | bash
+#curl -fsSL https://opencode.ai/v2/install | bash
 
